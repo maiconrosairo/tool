@@ -3,214 +3,86 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>DrTool • Ferramentas de Texto & TI</title>
+<title>DrTool Suite</title>
 
 <style>
-:root {
-  --bg:#0f172a;
-  --card:#020617;
-  --text:#e5e7eb;
-  --muted:#94a3b8;
-  --accent:#38bdf8;
-  --border:#1e293b;
-  --radius:14px;
+:root{
+ --bg:#0f172a;--card:#020617;--text:#e5e7eb;
+ --muted:#94a3b8;--accent:#38bdf8;--border:#1e293b;
 }
-
 *{box-sizing:border-box}
-
 body{
-  margin:0;
-  font-family:system-ui;
-  background:linear-gradient(135deg,#020617,#0f172a);
-  color:var(--text);
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
+ margin:0;font-family:system-ui;
+ background:linear-gradient(135deg,#020617,#0f172a);
+ color:var(--text);min-height:100vh;
+ display:flex;flex-direction:column
 }
 
-/* =========================
-   TOPO PADRÃO (NAV)
-========================= */
+/* TOPO COM BOTÕES */
 header{
-  background:#020617;
-  border-bottom:1px solid var(--border);
-  padding:.75rem 1.25rem;
+ background:#020617;
+ border-bottom:1px solid var(--border);
+ padding:1rem;
 }
-
 .nav{
-  max-width:1200px;
-  margin:0 auto;
-  display:flex;
-  align-items:center;
-  gap:1rem;
+ max-width:1200px;
+ margin:0 auto;
+ display:flex;
+ gap:1rem;
+ flex-wrap:wrap;
+}
+.nav button{
+ padding:.6rem 1rem;
+ border-radius:8px;
+ border:none;
+ background:var(--accent);
+ color:#020617;
+ font-weight:600;
+ cursor:pointer;
 }
 
-.nav-title{
-  font-weight:700;
-  color:var(--accent);
-  font-size:.95rem;
-}
-
-.nav-sub{
-  margin-left:auto;
-  font-size:.85rem;
-  color:var(--muted);
-}
-
-/* ========================= */
-
+/* CONTEÚDO */
 main{
-  flex:1;
-  padding:24px;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:20px;
-  max-width:1200px;
-  margin:0 auto;
-  width:100%;
+ flex:1;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ padding:2rem;
 }
-
-.tool-card{
-  background:linear-gradient(180deg,#020617,#020617cc);
-  border-radius:var(--radius);
-  padding:20px;
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-  border:1px solid var(--border);
-  transition:transform .2s ease, box-shadow .2s ease;
+.card{
+ background:var(--card);
+ border:1px solid var(--border);
+ border-radius:14px;
+ padding:2rem;
+ max-width:600px;
+ text-align:center;
 }
-
-.tool-card:hover{
-  transform:translateY(-4px);
-  box-shadow:0 10px 30px rgba(0,0,0,.5);
-}
-
-.tool-header{
-  display:flex;
-  align-items:center;
-  gap:12px;
-}
-
-.tool-icon{
-  width:34px;
-  height:34px;
-  fill:var(--accent);
-  flex-shrink:0;
-}
-
-.tool-title{
-  font-size:1.05rem;
-  margin:0;
-}
-
-.tool-description{
-  margin:14px 0;
-  font-size:.9rem;
-  color:var(--muted);
-  line-height:1.4;
-}
-
-.tool-action{
-  display:flex;
-  justify-content:flex-end;
-}
-
-button{
-  background:linear-gradient(135deg,var(--accent),#0ea5e9);
-  color:#020617;
-  border:none;
-  border-radius:10px;
-  padding:10px 16px;
-  font-size:.85rem;
-  cursor:pointer;
-  font-weight:600;
-}
-
-button:disabled{
-  opacity:.4;
-  cursor:not-allowed;
-}
-
 footer{
-  padding:16px;
-  text-align:center;
-  font-size:.8rem;
-  color:var(--muted);
+ text-align:center;
+ padding:1rem;
+ font-size:.8rem;
+ color:var(--muted);
 }
 </style>
 </head>
-
 <body>
 
-<!-- TOPO PADRÃO -->
 <header>
-  <nav class="nav" aria-label="Navegação principal">
-    <div class="nav-title">DrTool Suite</div>
-    <div class="nav-sub">Ferramentas de Texto & TI</div>
-  </nav>
+<nav class="nav">
+<button onclick="location.href='index.html'">Home</button>
+<button onclick="location.href='src/separador-de-linhas.html'">Separador</button>
+<button onclick="location.href='src/juntador-de-linhas.html'">Juntador</button>
+</nav>
 </header>
 
 <main>
-
-  <!-- SEPARADOR DE LINHAS -->
-  <section class="tool-card" aria-label="Separador de Linhas">
-    <div>
-      <div class="tool-header">
-        <svg class="tool-icon" viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M4 4h16v2H4zM4 11h16v2H4zM4 18h16v2H4z"/>
-        </svg>
-        <h2 class="tool-title">Separador de Linhas</h2>
-      </div>
-
-      <p class="tool-description">
-        Normaliza textos, ajusta quebras de linha (CRLF),
-        corrige encoding UTF-8 e separa linhas específicas
-        em arquivos TXT ou CSV.
-      </p>
-    </div>
-
-    <div class="tool-action">
-      <button onclick="navigate('src/separador-de-linhas.html')">
-        Abrir ferramenta
-      </button>
-    </div>
-  </section>
-
-  <!-- FUTURAS FERRAMENTAS -->
-  <section class="tool-card" aria-label="Em breve">
-    <div>
-      <div class="tool-header">
-        <svg class="tool-icon" viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 5v6l4 2-1 1-5-3V7z"/>
-        </svg>
-        <h2 class="tool-title">Validador TXT</h2>
-      </div>
-
-      <p class="tool-description">
-        Validação estrutural, regras lógicas
-        e conferência de arquivos texto
-        de grande volume.
-      </p>
-    </div>
-
-    <div class="tool-action">
-      <button disabled>Em breve</button>
-    </div>
-  </section>
-
+<div class="card">
+<h1>DrTool Suite</h1>
+<p>Ferramentas de tratamento de texto e utilidades de TI.</p>
+</div>
 </main>
 
-<footer>
-  © 2026 • DrTool Suite • Alta performance · Sem dependências
-</footer>
-
-<script>
-"use strict";
-function navigate(path){
-  window.location.href = path;
-}
-</script>
+<footer>© 2026 • DrTool Suite</footer>
 
 </body>
 </html>

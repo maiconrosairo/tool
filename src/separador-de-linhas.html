@@ -3,277 +3,86 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Separador TXT / CSV – Encoding Correto</title>
-
+<title>Separador de Linhas</title>
 <style>
-:root {
-  --bg:#0f172a;
-  --card:#020617;
-  --text:#e5e7eb;
-  --muted:#94a3b8;
-  --accent:#38bdf8;
-  --border:#1e293b;
-}
-
+:root{--bg:#0f172a;--card:#020617;--text:#e5e7eb;--muted:#94a3b8;--accent:#38bdf8;--border:#1e293b}
 *{box-sizing:border-box}
-
-body{
-  margin:0;
-  font-family:system-ui;
-  background:linear-gradient(135deg,#020617,#0f172a);
-  color:var(--text);
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-}
-
-/* =========================
-   TOPO PADRÃO
-========================= */
-header{
-  background:#020617;
-  border-bottom:1px solid var(--border);
-  padding:.75rem 1.25rem;
-}
-
-.nav{
-  max-width:900px;
-  margin:0 auto;
-  display:flex;
-  align-items:center;
-  gap:1rem;
-}
-
-.nav a{
-  color:var(--accent);
-  text-decoration:none;
-  font-weight:600;
-  font-size:.9rem;
-}
-
-.nav a:hover{ text-decoration:underline; }
-
-.nav-title{
-  margin-left:auto;
-  font-size:.9rem;
-  color:var(--muted);
-}
-
-/* ========================= */
-
-main{
-  flex:1;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:1.5rem;
-}
-
-.card{
-  max-width:760px;
-  width:100%;
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:14px;
-  padding:1.5rem;
-  display:flex;
-  flex-direction:column;
-  gap:1.2rem;
-}
-
-h1{margin:0;text-align:center}
-
-.instructions{
-  background:#0b1220;
-  border:1px solid var(--border);
-  padding:1rem;
-  border-radius:10px;
-  font-size:.85rem;
-  color:var(--muted);
-  line-height:1.5;
-}
-
-.instructions strong{
-  color:var(--text);
-}
-
-label{font-size:.9rem;color:var(--muted)}
-
-input{
-  width:100%;
-  padding:.65rem;
-  border-radius:8px;
-  background:#020617;
-  border:1px solid var(--border);
-  color:var(--text)
-}
-
-.actions{
-  display:flex;
-  gap:1rem;
-  flex-wrap:wrap
-}
-
-button{
-  flex:1;
-  padding:.75rem;
-  border-radius:8px;
-  font-weight:600;
-  border:none;
-  cursor:pointer;
-  background:var(--accent);
-  color:#020617
-}
-
-button.secondary{
-  background:#020617;
-  border:1px solid var(--border);
-  color:var(--text)
-}
-
-footer{
-  text-align:center;
-  font-size:.75rem;
-  color:var(--muted)
-}
+body{margin:0;font-family:system-ui;background:linear-gradient(135deg,#020617,#0f172a);color:var(--text);min-height:100vh;display:flex;flex-direction:column}
+header{background:#020617;border-bottom:1px solid var(--border);padding:1rem}
+.nav{display:flex;gap:1rem}
+.nav button{padding:.5rem 1rem;border:none;border-radius:8px;background:var(--accent);color:#020617;font-weight:600;cursor:pointer}
+main{flex:1;display:flex;align-items:center;justify-content:center;padding:1.5rem}
+.card{max-width:700px;width:100%;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.5rem;display:flex;flex-direction:column;gap:1rem}
+input{width:100%;padding:.6rem;border-radius:8px;border:1px solid var(--border);background:#020617;color:var(--text)}
+.actions{display:flex;gap:1rem}
+button.action{flex:1;padding:.7rem;border:none;border-radius:8px;background:var(--accent);color:#020617;font-weight:600;cursor:pointer}
+button.secondary{background:#020617;border:1px solid var(--border);color:var(--text)}
 </style>
 </head>
-
 <body>
 
 <header>
-  <nav class="nav" aria-label="Navegação principal">
-    <a href="../index.html">← DrTool</a>
-    <div class="nav-title">Separador TXT / CSV</div>
-  </nav>
+<div class="nav">
+<button onclick="location.href='../index.html'">Home</button>
+<button onclick="location.href='juntador-de-linhas.html'">Juntador</button>
+</div>
 </header>
 
 <main>
 <section class="card">
-
-<h1>Separador TXT / CSV</h1>
-
-<!-- =========================
-     INSTRUÇÕES DE USO
-========================= -->
-<div class="instructions" role="region" aria-label="Instruções de utilização">
-<strong>Como utilizar:</strong>
-<ol>
-<li>Selecione um arquivo <strong>.txt</strong> ou <strong>.csv</strong>.</li>
-<li>Informe as linhas desejadas no campo correspondente.</li>
-<li>Você pode informar números individuais ou intervalos:</li>
-<ul>
-<li><strong>1,3,5</strong> → linhas específicas</li>
-<li><strong>5-10</strong> → intervalo de linhas</li>
-<li><strong>1,3,5-10</strong> → combinação</li>
-</ul>
-<li>Clique em:</li>
-<ul>
-<li><strong>Baixar selecionadas</strong> → gera um arquivo contendo apenas as linhas informadas.</li>
-<li><strong>Baixar restantes</strong> → gera um arquivo contendo todas as demais linhas que NÃO foram selecionadas.</li>
-</ul>
-</ol>
-
-<p>
-Os arquivos são gerados em <strong>UTF-8 sem BOM</strong>, com quebra de linha padrão <strong>Windows (CRLF)</strong> e detecção automática de encoding.
-</p>
-</div>
-
-<div>
-<label>Arquivo (.txt ou .csv)</label>
-<input id="fileInput" type="file" accept=".txt,.csv">
-</div>
-
-<div>
-<label>Linhas desejadas (1,3,5-10)</label>
+<h2>Separador de Linhas</h2>
+<input id="fileInput" type="file" accept=".txt">
 <input id="linesInput" placeholder="1,3,5-10">
-</div>
-
 <div class="actions">
-<button id="btnSelected" disabled>Baixar selecionadas</button>
-<button id="btnRemaining" class="secondary" disabled>Baixar restantes</button>
+<button class="action" id="btnSelected" disabled>Selecionadas</button>
+<button class="action secondary" id="btnRemaining" disabled>Restantes</button>
 </div>
-
-<footer>Saída UTF-8 sem BOM · CRLF · Encoding automático</footer>
-
 </section>
 </main>
 
 <script>
 "use strict";
+const fileInput=document.getElementById('fileInput');
+const linesInput=document.getElementById('linesInput');
+const btnSelected=document.getElementById('btnSelected');
+const btnRemaining=document.getElementById('btnRemaining');
+let fileLines=[];
 
-const fileInput = document.getElementById('fileInput');
-const linesInput = document.getElementById('linesInput');
-const btnSelected = document.getElementById('btnSelected');
-const btnRemaining = document.getElementById('btnRemaining');
-
-let fileLines = [];
-
-async function readTextAutoEncoding(file) {
-  const utf8Text = await file.text();
-  if (!utf8Text.includes('�')) return utf8Text;
-
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsText(file, 'windows-1252');
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = reject;
-  });
-}
-
-fileInput.addEventListener('change', async () => {
-  const file = fileInput.files[0];
-  if (!file) return;
-
-  const text = await readTextAutoEncoding(file);
-  fileLines = text.replace(/\r\n/g,'\n').replace(/\r/g,'\n').split('\n');
-
-  btnSelected.disabled = false;
-  btnRemaining.disabled = false;
+fileInput.addEventListener('change',async()=>{
+ const file=fileInput.files[0];
+ const text=await file.text();
+ fileLines=text.replace(/\r\n/g,'\n').replace(/\r/g,'\n').split('\n');
+ btnSelected.disabled=false;
+ btnRemaining.disabled=false;
 });
 
-function parseLines(value){
-  const set=new Set();
-  value.split(',').forEach(p=>{
-    if(p.includes('-')){
-      const[a,b]=p.split('-').map(Number);
-      if(!isNaN(a)&&!isNaN(b)){
-        for(let i=a;i<=b;i++) set.add(i);
-      }
-    }else{
-      const n=Number(p);
-      if(!isNaN(n)) set.add(n);
-    }
-  });
-  return set;
+function parseLines(v){
+ const s=new Set();
+ v.split(',').forEach(p=>{
+  if(p.includes('-')){
+   const[a,b]=p.split('-').map(Number);
+   for(let i=a;i<=b;i++)s.add(i);
+  }else s.add(Number(p));
+ });
+ return s;
 }
 
-function downloadFile(name, lines){
-  const content = lines.join('\r\n');
-  const data = new TextEncoder().encode(content);
-  const blob = new Blob([data],{type:'text/plain;charset=utf-8'});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href=url;
-  a.download=name;
-  a.click();
-  URL.revokeObjectURL(url);
+function download(name,lines){
+ const content=lines.join('\r\n');
+ const blob=new Blob([new TextEncoder().encode(content)],{type:'text/plain;charset=utf-8'});
+ const url=URL.createObjectURL(blob);
+ const a=document.createElement('a');
+ a.href=url;a.download=name;a.click();
+ URL.revokeObjectURL(url);
 }
 
 btnSelected.onclick=()=>{
-  const sel=parseLines(linesInput.value);
-  downloadFile(
-    'linhas_selecionadas.txt',
-    fileLines.filter((_,i)=>sel.has(i+1))
-  );
+ const sel=parseLines(linesInput.value);
+ download('selecionadas.txt',fileLines.filter((_,i)=>sel.has(i+1)));
 };
-
 btnRemaining.onclick=()=>{
-  const sel=parseLines(linesInput.value);
-  downloadFile(
-    'linhas_restantes.txt',
-    fileLines.filter((_,i)=>!sel.has(i+1))
-  );
+ const sel=parseLines(linesInput.value);
+ download('restantes.txt',fileLines.filter((_,i)=>!sel.has(i+1)));
 };
 </script>
 

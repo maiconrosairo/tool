@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Juntador de Linhas</title>
+<style>
+:root{--bg:#0f172a;--card:#020617;--text:#e5e7eb;--muted:#94a3b8;--accent:#38bdf8;--border:#1e293b}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui;background:linear-gradient(135deg,#020617,#0f172a);color:var(--text);min-height:100vh;display:flex;flex-direction:column}
+header{background:#020617;border-bottom:1px solid var(--border);padding:1rem}
+.nav{display:flex;gap:1rem}
+.nav button{padding:.5rem 1rem;border:none;border-radius:8px;background:var(--accent);color:#020617;font-weight:600;cursor:pointer}
+main{flex:1;display:flex;align-items:center;justify-content:center;padding:1.5rem}
+.card{max-width:700px;width:100%;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.5rem;display:flex;flex-direction:column;gap:1rem}
+.dropzone{border:2px dashed var(--accent);padding:2rem;text-align:center;border-radius:12px;color:var(--muted)}
+.file-list{background:#0b1220;border:1px solid var(--border);padding:1rem;border-radius:10px;font-size:.85rem}
+.file-item{padding:.3rem 0;border-bottom:1px solid var(--border)}
+.file-item:last-child{border-bottom:none}
+button.action{padding:.7rem;border:none;border-radius:8px;background:var(--accent);color:#020617;font-weight:600;cursor:pointer}
+</style>
+</head>
+<body>
+
+<header>
+<div class="nav">
+<button onclick="location.href='../index.html'">Home</button>
+<button onclick="location.href='separador-de-linhas.html'">Separador</button>
+</div>
+</header>
+
+<main>
+<section class="card">
+<h2>Juntador de Arquivos TXT</h2>
+<div class="dropzone" id="dropzone">Arraste arquivos .txt aqui</div>
+<div id="fileList" class="file-list" style="display:none"></div>
+<button class="action" id="downloadBtn" disabled>Baixar arquivo único</button>
+</section>
+</main>
+
+<script>
+"use strict";
+const dropzone=document.getElementById('dropzone');
+const fileList=document.getElementById('fileList');
+const downloadBtn=document.getElementById('downloadBtn');
+let contents=[];
+
+dropzone.addEventListener('dragover',e=>{
+ e.preventDefault();
+ dropzone.style.background="#1e293b";
+});
+
+dropzone.addEventListener('dragleave',()=>{
+ dropzone.style.background="";
+});
+
+dropzone.addEventListener('drop',async e=>{
+ e.preventDefault();
+ dropzone.style.background="";
+ const files=[...e.dataTransfer.files].filter(f=>f.name.endsWith('.txt'));
+ contents=[];
+ fileList.innerHTML="";
+ 
+ for(const file of files){
+  const text=await file.text();
+  contents.push(text.replace(/\r\n/g,'\n').replace(/\r/g,'\n'));
+  
+  const div=document.createElement('div');
+  div.className="file-item";
+  div.textContent=file.name;
+  fileList.appendChild(div);
+ }
+
+ if(contents.length>0){
+  fileList.style.display="block";
+  downloadBtn.disabled=false;
+ }
+});
+
+downloadBtn.onclick=()=>{
+ const joined=contents.join('\r\n');
+ const blob=new Blob([new TextEncoder().encode(joined)],{type:'text/plain;charset=utf-8'});
+ const url=URL.createObjectURL(blob);
+ const a=document.createElement('a');
+ a.href=url;a.download='arquivo_unico.txt';
+ a.click();
+ URL.revokeObjectURL(url);
+};
+</script>
+
+</body>
+</html>
